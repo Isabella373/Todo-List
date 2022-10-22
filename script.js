@@ -36,12 +36,12 @@ const model = {
     countItems: function() {
         const numItems = this.items.length;
         let numDoneItems =0;
-        this.items.forEach(function(item){
-            if(item.done===true){
-                numDoneItems ++;
+        const forEachItem = (item) => {
+            if(item.done === true){
+                numDoneItems++;
             }
-
-        });
+        }
+        this.items.forEach(forEachItem);
         return {
             numItems: numItems,
             numDoneItems:numDoneItems,
@@ -105,9 +105,13 @@ const model = {
     * If an item is undone, change it to done.
     */
     toggleAllItems: function() {
+        /*
         const count = this.countItems();
         const numItems = count.numItems;
-        const numDoneItems = count.numDoneItems;
+        const numDoneItems = count.numDoneItems;*/
+        //destructuring assignment
+        const {numItems, numDoneItems} = this.countItems();
+
         const markItemAsDone = item=>(item.done = true);
         const markItemAsUndone = item =>(item.done = false);
         const allItemsDone = numItems ===numDoneItems;
